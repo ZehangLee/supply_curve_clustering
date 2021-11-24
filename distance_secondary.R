@@ -203,9 +203,39 @@ set.ff(mat_dist,mat_dist_idx,dist_list_ff[start:end])
 
 ffsave(mat_dist,file="D:/Script/R_script/supply_curves_clustering/Supply curves clustering",add = T)
 
+d = dist_list
+
+attributes(d) <- list(Size = 43848,
+                      Labels = as.character(1:43848),
+                      Diag = FALSE,
+                      Upper = FALSE,
+                      method = "user")
+
+class(d) = "dist"
+
+result=hclust(d)
+result$merge
 
 
 
+# D = vt(mat_dist)
+# dim(D)
+# sum(D[2,])
+# 
+# D = as.matrix(D[,])
+# d = as.dist(D)
+# mat_dist_m = as.matrix(mat_dist[,])
+# 
+# mat_dist_m[lower.tri(mat_dist_m)] =NA
+
+
+
+#mat_dist_t = vt(mat_dist)
+
+#mat_dist_full = mat_dist + mat_dist_t
+
+#mat_dist =as.ffdf(mat_dist)
+#write.csv.ffdf(mat_dist, file = "mat_dist.csv")
 
 
 
@@ -223,6 +253,11 @@ ffsave(mat_dist,file="D:/Script/R_script/supply_curves_clustering/Supply curves 
 #inx =arrayIndex2vectorIndex(t(comb_inds), dim=c(4,4))
 
 #set.ff(dat,inx,0)
+
+
+
+
+
 ###########################################################################
 # 
 # Pmat[23805,]
@@ -359,3 +394,17 @@ ffsave(mat_dist,file="D:/Script/R_script/supply_curves_clustering/Supply curves 
 # b = b[1:min_len]
 # a= a[-1]
 # stepfun(a, b, f = 1, right = T) 
+
+
+
+a<-data.frame(site.x=c("A","A","A","B","B","C"),   
+                              site.y=c("B","C","D","C","D","D"),Distance=c(67,57,64,60,67,60))
+dij2 <- with(a, Distance)
+nams <- with(a, unique(c(as.character(site.x), as.character(site.y))))
+attributes(dij2) <- with(a, list(Size = length(nams),
+                         Labels = nams,
+                         Diag = FALSE,
+                         Upper = FALSE,
+                         method = "user"))
+class(dij2) <- "dist"
+dif2
